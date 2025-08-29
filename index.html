@@ -1,291 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Matthijs Kerkhoff</title>
-  <style>
-    :root {
-      --bg: #0b0f14;
-      --panel: #111827;
-      --panel-2: #0f172a;
-      --text: #e5e7eb;
-      --muted: #9ca3af;
-      --accent: #60a5fa;
-      --accent-2: #34d399;
-      --danger: #f87171;
-      --shadow: 0 10px 25px rgba(0,0,0,.35);
-      --radius: 16px;
-    }
-    * { box-sizing: border-box; }
-    html, body {
-      height: 100%;
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background: linear-gradient(180deg, #0b0f14, #0d1220 40%, #0b0f14);
-      color: var(--text);
-    }
-    a { color: inherit; text-decoration: none; }
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 24px;
-    }
-    .card {
-      background: radial-gradient(140% 120% at 100% 0%, rgba(96,165,250,.06), transparent 40%),
-                  radial-gradient(120% 120% at 0% 100%, rgba(52,211,153,.06), transparent 40%),
-                  var(--panel);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: var(--radius);
-      padding: 28px;
-      box-shadow: var(--shadow);
-    }
-    .center {
-      min-height: 100%;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-    }
-    h1,h2 { margin: 0 0 12px; letter-spacing: .3px; }
-    h1 { font-size: 28px; }
-    h2 { font-size: 22px; color: var(--muted); font-weight: 600; }
-    .muted { color: var(--muted); }
-
-    /* Login */
-    .login-grid { display: grid; gap: 16px; }
-    .field { display: grid; gap: 8px; }
-    .label { font-size: 14px; color: var(--muted); }
-    .input {
-      background: var(--panel-2);
-      color: var(--text);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 12px;
-      padding: 12px 14px;
-      outline: none;
-      transition: border .15s ease, box-shadow .15s ease;
-      font-size: 15px;
-    }
-    .input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(96,165,250,.2); }
-    .btn {
-      appearance: none; border: 0; cursor: pointer;
-      background: linear-gradient(180deg, #60a5fa, #3b82f6);
-      color: white; padding: 12px 16px; border-radius: 12px;
-      font-weight: 600; font-size: 15px; box-shadow: var(--shadow);
-      transition: transform .06s ease, filter .2s ease;
-    }
-    .btn:hover { filter: brightness(1.05); }
-    .btn:active { transform: translateY(1px); }
-    .btn-outline { background: transparent; border: 1px solid rgba(255,255,255,.14); }
-    .row { display: flex; gap: 12px; align-items: center; }
-    .error { color: var(--danger); font-size: 14px; min-height: 18px; }
-
-    /* Grid for main branches */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-      margin-top: 20px;
-    }
-    .tile {
-      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px; padding: 18px; display: grid; gap: 8px;
-      transition: transform .12s ease, border-color .15s ease, box-shadow .15s ease;
-      cursor: pointer;
-    }
-    .tile:hover { transform: translateY(-2px); border-color: rgba(255,255,255,.18); box-shadow: var(--shadow); }
-    .pill { display: inline-block; font-size: 12px; padding: 4px 8px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14); color: var(--muted); }
-
-    .topbar {
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
-      margin-bottom: 18px;
-    }
-    .logout { background: transparent; border: 1px solid rgba(255,255,255,.14); color: var(--text); padding: 10px 14px; border-radius: 10px; cursor: pointer; }
-
-    /* Sections */
-    .section { display: none; }
-    .section.active { display: block; }
-    .back { margin-top: 16px; }
-    .divider { height: 1px; background: rgba(255,255,255,.08); margin: 14px 0; border-radius: 999px; }
-
-    @media (max-width: 480px) {
-      h1 { font-size: 24px; }
-      .card { padding: 22px; }
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
   <main class="center">
     <div class="container">
-      <!-- LOGIN VIEW -->
-      <section id="view-login" class="card section">
+      <section class="card">
         <h1>Welcome</h1>
         <p class="muted">Sign in to continue.</p>
         <div class="divider"></div>
         <form id="login-form" class="login-grid" autocomplete="off">
           <div class="field">
             <label class="label" for="username">Username</label>
-            <input id="username" class="input" name="username" placeholder="Enter username here" />
+            <input id="username" class="input" name="username" placeholder="Viewer">
           </div>
           <div class="field">
             <label class="label" for="password">Password</label>
-            <input id="password" class="input" name="password" type="password" placeholder="Enter password here" />
+            <input id="password" class="input" name="password" type="password" placeholder="••••••">
           </div>
           <div class="error" id="login-error"></div>
           <div class="row">
             <button class="btn" type="submit">Login</button>
             <button class="btn btn-outline" type="reset">Clear</button>
           </div>
-          <div class="muted" style="font-size:12px">Made by: <span class="pill">Matthijs</span></div>
+          <div class="muted" style="font-size:12px">Demo credentials: <span class="pill">Viewer / admin</span></div>
         </form>
-      </section>
-
-      <!-- MAIN MENU VIEW -->
-      <section id="view-main" class="card section">
-        <div class="topbar">
-          <div>
-            <h1>Main Menu</h1>
-            <div class="muted">Choose a branch to enter.</div>
-          </div>
-          <button class="logout" id="btn-logout" title="Sign out">Logout</button>
-        </div>
-        <div class="grid">
-          <article class="tile" data-go="#view-nl">
-            <div class="pill">Branch</div>
-            <h2>NL Fictiedossier</h2>
-            <p class="muted">Nederlandstalige fictiedossiers en documenten.</p>
-          </article>
-          <article class="tile" data-go="#view-shop">
-            <div class="pill">Branch</div>
-            <h2>Webshop</h2>
-            <p class="muted">Producten, bestellingen en winkelwagen.</p>
-          </article>
-          <article class="tile" data-go="#view-tests">
-            <div class="pill">Branch</div>
-            <h2>Tests</h2>
-            <p class="muted">Proeven, formulieren en resultaten.</p>
-          </article>
-        </div>
-      </section>
-
-      <!-- NL Fictiedossier -->
-      <section id="view-nl" class="card section">
-        <div class="topbar">
-          <div>
-            <h1>NL Fictiedossier</h1>
-            <div class="muted">Placeholder pagina — vul met jouw content.</div>
-          </div>
-          <button class="logout" data-go="#view-main">Back</button>
-        </div>
-        <div class="divider"></div>
-        <p>
-          Dit is een voorbeeldsectie. Voeg hier je dossiers, tabellen of links toe.
-        </p>
-      </section>
-
-      <!-- Webshop -->
-      <section id="view-shop" class="card section">
-        <div class="topbar">
-          <div>
-            <h1>Webshop</h1>
-            <div class="muted">Placeholder pagina — producten, mandje, checkout.</div>
-          </div>
-          <button class="logout" data-go="#view-main">Back</button>
-        </div>
-        <div class="divider"></div>
-        <p>
-          Voeg productkaarten, filters en bestelknoppen toe. Dit is een startpunt.
-        </p>
-      </section>
-
-      <!-- Tests -->
-      <section id="view-tests" class="card section">
-        <div class="topbar">
-          <div>
-            <h1>Tests</h1>
-            <div class="muted">Placeholder pagina — quizzen of formulieren.</div>
-          </div>
-          <button class="logout" data-go="#view-main">Back</button>
-        </div>
-        <div class="divider"></div>
-        <p>
-          Bouw hier je testlogica of formulierverwerking.
-        </p>
       </section>
     </div>
   </main>
-
-  <script>
-    // --- Simple client-side auth (demo only) ---
-    const DEMO_USER = { username: 'Viewer', password: 'admin' };
-    const AUTH_KEY = 'demo_auth_v1';
-
-    const $ = (sel) => document.querySelector(sel);
-
-    function setView(id) {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      const el = document.querySelector(id);
-      if (el) el.classList.add('active');
-    }
-
-    function isAuthed() {
-      try { return localStorage.getItem(AUTH_KEY) === 'true'; } catch { return false; }
-    }
-
-    function login(username, password) {
-      const ok = username === DEMO_USER.username && password === DEMO_USER.password;
-      if (ok) {
-        try { localStorage.setItem(AUTH_KEY, 'true'); } catch {}
-      }
-      return ok;
-    }
-
-    function logout() {
-      try { localStorage.removeItem(AUTH_KEY); } catch {}
-      setView('#view-login');
-    }
-
-    // Init
-    window.addEventListener('DOMContentLoaded', () => {
-      // Start at correct view
-      setView(isAuthed() ? '#view-main' : '#view-login');
-
-      // Login handler
-      const form = $('#login-form');
-      const err = $('#login-error');
-      form?.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const u = $('#username').value.trim();
-        const p = $('#password').value;
-        if (login(u, p)) {
-          err.textContent = '';
-          setView('#view-main');
-          form.reset();
-        } else {
-          err.textContent = 'Incorrect username or password.';
-        }
-      });
-
-      // Logout buttons
-      $('#btn-logout')?.addEventListener('click', logout);
-
-      // Client-side SPA navigation
-      document.body.addEventListener('click', (e) => {
-        const t = e.target;
-        if (t instanceof Element) {
-          const tile = t.closest('[data-go]');
-          if (tile) {
-            const target = tile.getAttribute('data-go');
-            if (target) setView(target);
-          }
-        }
-      });
-
-      // Improve UX: Enter to submit on password
-      $('#password')?.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') form.requestSubmit();
-      });
-    });
-  </script>
 </body>
 </html>
